@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Kedai Sentul - Coffee & Resto Terbaik di Jonggol</title>
+    <meta name="description" content="Nikmati kopi enak, makanan lezat, dan suasana nyaman di Kedai Sentul. Lokasi strategis di Jl. Raya Menteng, Jonggol. Cocok untuk keluarga dan WFC.">
+    <meta name="keywords" content="Kedai Sentul, Coffee Shop Jonggol, Restoran Jonggol, Nasi Goreng Jonggol, Tempat Nongkrong Bogor">
+    <meta name="author" content="Kedai Sentul">
+    <meta name="theme-color" content="#15803d"> <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#15803d', // Hijau (Green-700)
+                        secondary: '#ea580c', // Oren (Orange-600)
+                        light: '#f8fafc', // Putih Kebiruan (Slate-50)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Animation Classes */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-light antialiased selection:bg-secondary selection:text-white">
+
+    <header x-data="{ mobileMenuOpen: false }" class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center" aria-label="Global">
+            
+            <a href="#" class="text-2xl font-serif font-bold text-primary tracking-tight">
+                KEDAI <span class="text-secondary">SENTUL</span>
+            </a>
+
+            <div class="hidden lg:flex gap-8 items-center font-medium text-sm">
+                <a href="#home" class="hover:text-primary transition-colors">Beranda</a>
+                <a href="#features" class="hover:text-primary transition-colors">Keunggulan</a>
+                <a href="#menu" class="hover:text-primary transition-colors">Menu Favorit</a>
+                <a href="#location" class="hover:text-primary transition-colors">Lokasi</a>
+                <a href="https://wa.me/6282298131209?text=Halo%20Kedai%20Sentul,%20saya%20ingin%20memesan..." target="_blank" 
+                   class="bg-primary text-white px-5 py-2.5 rounded-full hover:bg-green-800 transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.506-.669-.516-.173-.009-.371-.009-.57-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Pesan via WA
+                </a>
+            </div>
+
+            <div class="flex lg:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" aria-label="Buka menu utama">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100">
+            <div class="space-y-1 px-6 py-6">
+                <a href="#home" @click="mobileMenuOpen = false" class="block py-3 text-base font-semibold leading-7 text-gray-900 hover:text-primary">Beranda</a>
+                <a href="#features" @click="mobileMenuOpen = false" class="block py-3 text-base font-semibold leading-7 text-gray-900 hover:text-primary">Keunggulan</a>
+                <a href="#menu" @click="mobileMenuOpen = false" class="block py-3 text-base font-semibold leading-7 text-gray-900 hover:text-primary">Menu</a>
+                <a href="#location" @click="mobileMenuOpen = false" class="block py-3 text-base font-semibold leading-7 text-gray-900 hover:text-primary">Lokasi</a>
+                <a href="https://wa.me/6282298131209" class="mt-4 block w-full text-center bg-primary text-white px-4 py-3 rounded-lg font-semibold">Pesan Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2000&auto=format&fit=crop" 
+                 alt="Suasana Kedai Sentul yang nyaman dan asri" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center lg:text-left">
+            <div class="lg:w-2/3 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary border border-secondary/50 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    📍 Jl. Raya Menteng, Jonggol
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-6">
+                    Rasakan Kehangatan <br> <span class="text-secondary">Kuliner & Kopi</span> Terbaik
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 font-light leading-relaxed max-w-2xl">
+                    Kedai Sentul hadir menyajikan perpaduan kopi nikmat dan masakan lezat dengan suasana yang nyaman untuk keluarga, teman, maupun bekerja (WFC).
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="https://wa.me/6282298131209" class="bg-secondary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-700 transition-transform hover:scale-105 shadow-lg shadow-orange-500/30 text-center">
+                        Reservasi / Pesan
+                    </a>
+                    <a href="#menu" class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-all text-center">
+                        Lihat Menu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+
+        <section id="features" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-serif font-bold text-gray-900 mb-4">Kenapa Kedai Sentul?</h2>
+                    <div class="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
+                    <p class="mt-4 text-gray-600">Kami berkomitmen memberikan pengalaman kuliner terbaik dengan fasilitas lengkap.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-light p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-green-100 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Suasana Nyaman</h3>
+                        <p class="text-gray-600 leading-relaxed">Tersedia area indoor dan outdoor yang sejuk. Cocok untuk nongkrong santai, meeting, atau bekerja dengan laptop.</p>
+                    </div>
+
+                    <div class="bg-light p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-orange-100 text-secondary rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Menu Variatif</h3>
+                        <p class="text-gray-600 leading-relaxed">Dari Espresso based, masakan Nusantara (Nasi Goreng, Ikan), hingga camilan kekinian seperti Roti Bakar.</p>
+                    </div>
+
+                    <div class="bg-light p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Ramah Keluarga</h3>
+                        <p class="text-gray-600 leading-relaxed">Fasilitas parkir luas dan gratis, toilet bersih, serta menu yang disukai anak-anak. Bisa untuk rombongan besar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-20 bg-light">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                    <div class="max-w-xl">
+                        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2">Menu Favorit</h2>
+                        <p class="text-gray-600">Pilihan terbaik dari dapur kami untuk menemani hari Anda.</p>
+                    </div>
+                    <a href="https://wa.me/6282298131209" class="hidden md:inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors mt-4 md:mt-0">
+                        Lihat Menu Lengkap via WA <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Kopi Sentul Latte Art" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg text-gray-900">Kopi Sentul</h3>
+                                <span class="bg-green-100 text-primary text-xs font-bold px-2 py-1 rounded">17K</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">Signature coffee kami. Perpaduan kopi pilihan dengan susu yang creamy.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1603133872878-684f5c9322ed?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Nasi Goreng Spesial Telur" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg text-gray-900">Nasi Grg. Spesial</h3>
+                                <span class="bg-green-100 text-primary text-xs font-bold px-2 py-1 rounded">26K</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">Nasi goreng bumbu rempah khas dengan topping ayam dan telur mata sapi.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1596707323136-2ee2a407a518?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Gurame Asam Manis" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg text-gray-900">Gurame Asam Manis</h3>
+                                <span class="bg-green-100 text-primary text-xs font-bold px-2 py-1 rounded">47K</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">Ikan gurame segar digoreng tepung disiram saus asam manis lezat.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1626078302192-343206411516?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Roti Bakar Nutella" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg text-gray-900">Roti Bakar Nutella</h3>
+                                <span class="bg-green-100 text-primary text-xs font-bold px-2 py-1 rounded">13K</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">Roti bakar lembut dengan olesan selai Nutella yang melimpah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">Kunjungi Kami</h2>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="bg-green-50 p-3 rounded-lg text-primary h-fit">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Alamat</h4>
+                                    <p class="text-gray-600">Jl. Raya Menteng, Bendungan, Kec. Jonggol, Kabupaten Bogor, Jawa Barat 16830</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="bg-green-50 p-3 rounded-lg text-primary h-fit">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Jam Operasional</h4>
+                                    <ul class="text-gray-600 text-sm space-y-1 mt-1">
+                                        <li class="flex justify-between w-48"><span>Sen - Sab:</span> <span>10.00 – 23.00</span></li>
+                                        <li class="flex justify-between w-48"><span>Rabu:</span> <span>11.00 – 23.00</span></li>
+                                        <li class="flex justify-between w-48"><span>Minggu:</span> <span>10.00 – 23.30</span></li>
+                                        <li class="flex justify-between w-48 text-red-500 font-medium"><span>Kamis:</span> <span>Tutup</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="bg-green-50 p-3 rounded-lg text-primary h-fit">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Range Harga</h4>
+                                    <p class="text-gray-600">Rp 25.000 – Rp 50.000 per orang</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="font-bold text-gray-900 mb-3">Fasilitas</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">Parkir Gratis</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">Toilet</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">Area Outdoor</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">Dine-in & Takeaway</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">Drive-through</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.8465053258836!2d107.0583!3d-6.4137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69974578b87729%3A0x6734c56e3b5677a2!2sJl.%20Raya%20Menteng%2C%20Bendungan%2C%20Kec.%20Jonggol%2C%20Kabupaten%20Bogor%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Lokasi Kedai Sentul di Google Maps">
+                        </iframe>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-serif font-bold mb-1">KEDAI <span class="text-secondary">SENTUL</span></h3>
+                    <p class="text-gray-400 text-sm">Coffee & Resto</p>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="#" aria-label="Facebook Kedai Sentul" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram Kedai Sentul" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-xs text-gray-500">
+                &copy; 2026 Kedai Sentul. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
